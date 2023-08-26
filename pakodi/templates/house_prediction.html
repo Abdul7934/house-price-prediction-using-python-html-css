@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>House Price Prediction</title>
+    <style>
+        body {
+            background-image: url("background.jpg");
+            background-size: cover;
+        }
+
+        .container {
+            background-color: #f1f1f1;
+            padding: 20px;
+            margin: auto;
+            width: 80%;
+            max-width: 600px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h1 {
+            color: #4CAF50;
+        }
+    </style>
+    <script>
+  
+        function calculateTotal() {
+            // Get the selected values from the form
+            var location = document.getElementById("location").value;
+            var area = parseFloat(document.getElementById("area").value);
+            var locality = document.getElementById("locality").value;
+            var roomSize = document.getElementById("room_size").value;
+            var houseType = document.getElementById("house_type").value;
+            var duplex = document.querySelector('input[name="duplex"]:checked').value;
+            var stairs = document.querySelector('input[name="stairs"]:checked').value;
+            var extraSpace = document.querySelector('input[name="extra_space"]:checked').value;
+            var extraSpaceSize = parseFloat(document.getElementById("extra_space_size").value);
+            var masterBedroom = parseInt(document.getElementById("master_bedroom").value);
+            var carParking = parseInt(document.getElementById("car_parking").value);
+            var houseStyle = document.getElementById("house_style").value;
+            var roomType = document.getElementById("room_type").value;
+
+            // Calculate the cost based on the selected values
+            // Assuming some base prices and costs for different options
+            var basePrice = 1000; // Assuming base price per sq. ft.
+            var locationCost = 0;
+            if (location === "Chennai") {
+                locationCost = 500000;
+            } else if (location === "Coimbatore") {
+                locationCost = 400000;
+            } else if (location === "Mumbai") {
+                locationCost = 600000;
+            } else if (location === "Hyderabad") {
+                locationCost = 450000;
+            }
+
+            var localityCost = 0;
+            if (locality === "posh") {
+                localityCost = 300000;
+            } else if (locality === "higher standard") {
+                localityCost = 200000;
+            } else if (locality === "average") {
+                localityCost = 100000;
+            } else if (locality === "below average") {
+                localityCost = 50000;
+            }
+
+            var roomSizeCost = 0;
+            if (roomSize === "small") {
+                roomSizeCost = 200000;
+            } else if (roomSize === "medium") {
+                roomSizeCost = 300000;
+            } else if (roomSize === "large") {
+                roomSizeCost = 400000;
+            }
+
+            var houseTypeCost = 0;
+            if (houseType === "apartment") {
+                houseTypeCost = 500000;
+            } else if (houseType === "villa") {
+                houseTypeCost = 1000000;
+            } else if (houseType === "townhouse") {
+                houseTypeCost = 750000;
+            }
+
+            var duplexCost = 0;
+            if (duplex === "yes") {
+                duplexCost = 500000;
+            }
+
+            var stairsCost = 0;
+            if (stairs === "yes") {
+                stairsCost = 100000;
+            }
+
+            var extraSpaceCost = 0;
+            if (extraSpace === "yes") {
+                extraSpaceCost = 200000;
+            }
+
+            var extraSpaceSizeCost = extraSpaceSize * 100; // Assuming Rs. 100 per sq. ft. for extra space
+
+            var masterBedroomCost = masterBedroom * 20000; // Assuming Rs. 20000 per master bedroom
+
+            var carParkingCost = carParking * 25000; // Assuming Rs. 25000 per car parking space
+
+            var houseStyleCost = 0;
+            if (houseStyle === "modern") {
+                houseStyleCost = 500000;
+            } else if (houseStyle === "traditional") {
+                houseStyleCost = 400000;
+            }
+
+            var roomTypeCost = 0;
+            if (roomType === "premium") {
+                roomTypeCost = 300000;
+            } else if (roomType === "ensuited") {
+                roomTypeCost = 200000;
+            } else if (roomType === "shared") {
+                roomTypeCost = 100000;
+            }
+
+            // Calculate the total amount
+            var totalAmount = basePrice * area + locationCost + localityCost + roomSizeCost + houseTypeCost + duplexCost + stairsCost + extraSpaceCost + extraSpaceSizeCost + masterBedroomCost + carParkingCost + houseStyleCost + roomTypeCost;
+
+            // Display the total amount
+            document.getElementById("total_amount").textContent = "Total Amount: ₹" + totalAmount.toLocaleString();
+        }
+         // Function to print the page
+         function printPage() {
+            window.print();
+         }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1 style="color: #4CAF50">Welcome to the House Price Prediction</h1>
+        <h2>Login</h2>
+        <!-- Login form code goes here -->
+        <h2>House Price Prediction</h2>
+        <form action="" method="post">
+            <label for="location">Location:</label>
+            <select id="location" name="location" required>
+                <option value="Chennai">Chennai</option>
+                <option value="Coimbatore">Coimbatore</option>
+                <option value="Mumbai">Mumbai</option>
+                <option value="Hyderabad">Hyderabad</option>
+            </select><br><br>
+
+            <label for="area">Area (in sq. ft.):</label>
+            <input type="number" id="area" name="area" required><br><br>
+
+            <label for="locality">Locality:</label>
+            <select id="locality" name="locality" required>
+                <option value="posh">Posh</option>
+                <option value="higher standard">Higher Standard</option>
+                <option value="average">Average</option>
+                <option value="below average">Below Average</option>
+            </select><br><br>
+
+            <label for="room_size">Room Size:</label>
+            <select id="room_size" name="room_size" required>
+                <option value="small">Small</option>
+                <option value="medium">Medium</option>
+                <option value="large">Large</option>
+            </select><br><br>
+
+            <label for="house_type">House Type:</label>
+            <select id="house_type" name="house_type" required>
+                <option value="apartment">Apartment</option>
+                <option value="villa">Villa</option>
+                <option value="townhouse">Townhouse</option>
+            </select><br><br>
+
+            <label for="duplex">Duplex:</label>
+            <input type="radio" id="duplex_yes" name="duplex" value="yes" required>
+            <label for="duplex_yes">Yes</label>
+            <input type="radio" id="duplex_no" name="duplex" value="no" required>
+            <label for="duplex_no">No</label><br><br>
+
+            <label for="stairs">Stairs:</label>
+            <input type="radio" id="stairs_yes" name="stairs" value="yes" required>
+            <label for="stairs_yes">Yes</label>
+            <input type="radio" id="stairs_no" name="stairs" value="no" required>
+            <label for="stairs_no">No</label><br><br>
+
+            <label for="extra_space">Extra Space:</label>
+            <input type="radio" id="extra_space_yes" name="extra_space" value="yes" required>
+            <label for="extra_space_yes">Yes</label>
+            <input type="radio" id="extra_space_no" name="extra_space" value="no" required>
+            <label for="extra_space_no">No</label><br><br>
+
+            <label for="extra_space_size">Extra Space Size (in sq. ft.):</label>
+            <input type="number" id="extra_space_size" name="extra_space_size" required><br><br>
+
+            <label for="master_bedroom">Number of Master Bedrooms:</label>
+            <input type="number" id="master_bedroom" name="master_bedroom" required><br><br>
+
+            <label for="car_parking">Number of Cars:</label>
+            <input type="number" id="car_parking" name="car_parking" min="1" max="4" required><br><br>
+
+            <label for="house_style">House Style:</label>
+            <select id="house_style" name="house_style" required>
+                <option value="modern">Modern</option>
+                <option value="traditional">Traditional</option>
+            </select><br><br>
+
+            <label for="room_type">Room Type:</label>
+            <select id="room_type" name="room_type" required>
+                <option value="premium">Premium</option>
+                <option value="ensuited">Ensuited</option>
+                <option value="shared">Shared</option>
+            </select><br><br>
+
+            <input type="button" value="Predict House Price" onclick="calculateTotal()">
+        </form>
+
+        <h2 id="total_amount"></h2>
+        <p><a href="/logout">Logout</a><p>
+         <button type="button" onclick="printPage()">Print</button><br><br>
+
+        <p id="total_amount"></p>
+    </div>
+</body>
+</html>
